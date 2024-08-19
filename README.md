@@ -1,4 +1,5 @@
 # gmlewis/sha256
+[![check](https://github.com/gmlewis/moonbit-sha256/actions/workflows/check.yml/badge.svg)](https://github.com/gmlewis/moonbit-sha256/actions/workflows/check.yml)
 
 This is a simple sha256 hash algorithm based on Go's implementation:
 https://cs.opensource.google/go/go/+/refs/tags/go1.23.0:src/crypto/sha256/sha256.go
