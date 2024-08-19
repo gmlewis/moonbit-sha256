@@ -35,6 +35,9 @@ struct Digest {
   x : FixedArray[Byte] // chunk
   mut nx : Int
   mut len : UInt64
+  // workaround to get rid of compiler warning:
+  // See: https://discord.com/channels/1135479745207869510/1272985768498958387/1275082247484997693
+  name : String
 }
 
 /// `Digest::new` returns a new, reset Digest, ready to sum.
@@ -46,13 +49,15 @@ pub fn Digest::new() -> Digest {
     x: FixedArray::make(chunk, b'\x00'),
     nx: 0,
     len: 0,
+    // workaround to get rid of compiler warning:
+    name: "sha256",
   }
 }
 
 let _interface : HashFunc = Digest::new()
 
 pub fn name(self : Digest) -> String {
-  "sha256"
+  self.name
 }
 
 /// `check_sum` returns the final sha256sum as a hex string.
