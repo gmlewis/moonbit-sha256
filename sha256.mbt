@@ -217,7 +217,7 @@ fn be_put_uint64(b : FixedArray[Byte], offset : Int, value : UInt64) -> Unit {
 }
 
 fn rotl(x : UInt, r : Int) -> UInt {
-  x.lsl(r).lor(x.lsr(32 - r))
+  x.lsl(r) | x.lsr(32 - r)
 }
 
 fn to_hex(v : Int) -> Char {
