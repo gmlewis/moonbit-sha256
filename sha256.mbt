@@ -63,9 +63,9 @@ pub fn name(self : Digest) -> String {
 /// `check_sum` returns the final sha256sum as a hex string.
 pub fn check_sum(self : Digest) -> String {
   let digest = self.sum()
-  let result = Buffer::new(size_hint=2 * size)
+  let result = @buffer.new(size_hint=2 * size)
   for b in digest {
-    result.write_char(to_hex(b.to_int().lsr(4) & 0xf))
+    result.write_char(to_hex((b.to_int() >> 4) & 0xf))
     result.write_char(to_hex(b.to_int() & 0xf))
   }
   result.to_string()
@@ -206,18 +206,18 @@ fn block_generic(self : Digest) -> Unit {
 
 fn be_put_uint32(b : FixedArray[Byte], offset : Int, value : UInt) -> Unit {
   b[offset + 3] = (value & 0xff).to_byte()
-  b[offset + 2] = (value.lsr(8) & 0xff).to_byte()
-  b[offset + 1] = (value.lsr(16) & 0xff).to_byte()
-  b[offset] = (value.lsr(24) & 0xff).to_byte()
+  b[offset + 2] = ((value >> 8) & 0xff).to_byte()
+  b[offset + 1] = ((value >> 16) & 0xff).to_byte()
+  b[offset] = ((value >> 24) & 0xff).to_byte()
 }
 
 fn be_put_uint64(b : FixedArray[Byte], offset : Int, value : UInt64) -> Unit {
   be_put_uint32(b, offset + 4, (value & 0xffffffff).to_uint())
-  be_put_uint32(b, offset, (value.lsr(32) & 0xffffffff).to_uint())
+  be_put_uint32(b, offset, ((value >> 32) & 0xffffffff).to_uint())
 }
 
 fn rotl(x : UInt, r : Int) -> UInt {
-  x.lsl(r) | x.lsr(32 - r)
+  (x << r) | (x >> (32 - r))
 }
 
 fn to_hex(v : Int) -> Char {
