@@ -1,4 +1,4 @@
-/// This package is based on the Go implementation found here:
+///| This package is based on the Go implementation found here:
 /// https://cs.opensource.google/go/go/+/refs/tags/go1.23.0:src/crypto/sha256/sha256.go
 /// which has the copyright notice:
 /// Copyright 2009 The Go Authors. All rights reserved.
@@ -9,27 +9,37 @@
 let size = 32
 
 // The blocksize of sha256 in bytes.
+///|
 let block_size = 64
 
+///|
 let chunk = 64
 
+///|
 let init0 = 0x6A09E667U
 
+///|
 let init1 = 0xBB67AE85U
 
+///|
 let init2 = 0x3C6EF372U
 
+///|
 let init3 = 0xA54FF53AU
 
+///|
 let init4 = 0x510E527FU
 
+///|
 let init5 = 0x9B05688CU
 
+///|
 let init6 = 0x1F83D9ABU
 
+///|
 let init7 = 0x5BE0CD19U
 
-/// `Digest` represents the partial evaluation of a checksum.
+///| `Digest` represents the partial evaluation of a checksum.
 struct Digest {
   h : FixedArray[UInt] // 8
   x : FixedArray[Byte] // chunk
@@ -40,7 +50,7 @@ struct Digest {
   name : String
 }
 
-/// `Digest::new` returns a new, reset Digest, ready to sum.
+///| `Digest::new` returns a new, reset Digest, ready to sum.
 pub fn Digest::new() -> Digest {
   {
     h: FixedArray::from_array(
@@ -54,13 +64,15 @@ pub fn Digest::new() -> Digest {
   }
 }
 
+///|
 let _interface : HashFunc = Digest::new()
 
+///|
 pub fn name(self : Digest) -> String {
   self.name
 }
 
-/// `check_sum` returns the final sha256sum as a hex string.
+///| `check_sum` returns the final sha256sum as a hex string.
 pub fn check_sum(self : Digest) -> String {
   let digest = self.sum()
   let result = @buffer.new(size_hint=2 * size)
@@ -71,7 +83,7 @@ pub fn check_sum(self : Digest) -> String {
   result.to_unchecked_string()
 }
 
-/// `sum` returns the final sha256sum as a `FixedArray[Byte]`.
+///| `sum` returns the final sha256sum as a `FixedArray[Byte]`.
 fn sum(self : Digest) -> FixedArray[Byte] {
   // Padding. Add a 1 bit and 0 bits until 56 bytes mod 64.
   let tmp = FixedArray::make(64 + 8, b'\x00')
@@ -108,7 +120,7 @@ fn sum(self : Digest) -> FixedArray[Byte] {
   digest
 }
 
-/// `reset` resets a digest for re-use.
+///| `reset` resets a digest for re-use.
 pub fn reset(self : Digest) -> Unit {
   self.h[0] = init0
   self.h[1] = init1
@@ -122,7 +134,7 @@ pub fn reset(self : Digest) -> Unit {
   self.len = 0
 }
 
-/// `write` writes a byte to the digest.
+///| `write` writes a byte to the digest.
 pub fn write(self : Digest, b : Byte) -> Unit {
   self.len += 1
   self.x[self.nx] = b
@@ -133,6 +145,7 @@ pub fn write(self : Digest, b : Byte) -> Unit {
   }
 }
 
+///|
 let _K = [
   0x428a2f98U, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4,
   0xab1c5ed5, 0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe,
@@ -146,6 +159,7 @@ let _K = [
   0xc67178f2,
 ]
 
+///|
 fn block_generic(self : Digest) -> Unit {
   let w = FixedArray::make(64, 0U)
 
@@ -204,6 +218,7 @@ fn block_generic(self : Digest) -> Unit {
   self.h[7] += h
 }
 
+///|
 fn be_put_uint32(b : FixedArray[Byte], offset : Int, value : UInt) -> Unit {
   b[offset + 3] = (value & 0xff).to_byte()
   b[offset + 2] = ((value >> 8) & 0xff).to_byte()
@@ -211,15 +226,18 @@ fn be_put_uint32(b : FixedArray[Byte], offset : Int, value : UInt) -> Unit {
   b[offset] = ((value >> 24) & 0xff).to_byte()
 }
 
+///|
 fn be_put_uint64(b : FixedArray[Byte], offset : Int, value : UInt64) -> Unit {
   be_put_uint32(b, offset + 4, (value & 0xffffffff).to_uint())
   be_put_uint32(b, offset, ((value >> 32) & 0xffffffff).to_uint())
 }
 
+///|
 fn rotl(x : UInt, r : Int) -> UInt {
   (x << r) | (x >> (32 - r))
 }
 
+///|
 fn to_hex(v : Int) -> Char {
   if v < 10 {
     Char::from_int(v + b'0'.to_int())

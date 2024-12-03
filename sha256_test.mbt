@@ -1,15 +1,15 @@
-/// This package is based on the Go implementation found here:
+///| This package is based on the Go implementation found here:
 /// https://cs.opensource.google/go/go/+/refs/tags/go1.23.0:src/crypto/sha256/sha256_test.go
 /// which has the copyright notice:
 /// Copyright 2009 The Go Authors. All rights reserved.
 /// Use of this source code is governed by a BSD-style
 /// license that can be found in the LICENSE file.
-
 struct SHA256Test {
   out : String
   s : String
 }
 
+///|
 let golden : Array[SHA256Test] = [
   {
     out: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",

@@ -5,7 +5,7 @@
 /// Use of this source code is governed by a BSD-style
 /// license that can be found in the LICENSE file.
 
-/// `gen_hmac` generates a base64-encoded String representing
+///| `gen_hmac` generates a base64-encoded String representing
 /// the SHA256 signature of the provided `body` using the provided
 /// `client_secret` key.
 pub fn gen_hmac(body : Bytes, client_secret : Bytes) -> String {
@@ -17,6 +17,7 @@ pub fn gen_hmac(body : Bytes, client_secret : Bytes) -> String {
   @base64.url_encode2str(buf)
 }
 
+///|
 struct HMAC {
   opad : FixedArray[Byte]
   ipad : FixedArray[Byte]
@@ -24,6 +25,7 @@ struct HMAC {
   inner : Digest
 }
 
+///|
 fn HMAC::new(key : Bytes) -> HMAC {
   let hm = {
     opad: FixedArray::make(block_size, b'\x00'),
@@ -54,6 +56,7 @@ fn HMAC::new(key : Bytes) -> HMAC {
   hm
 }
 
+///|
 fn sum(self : HMAC) -> FixedArray[Byte] {
   let inner_sum = self.inner.sum()
   self.outer.reset()
