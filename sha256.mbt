@@ -53,9 +53,9 @@ struct Digest {
 ///| `Digest::new` returns a new, reset Digest, ready to sum.
 pub fn Digest::new() -> Digest {
   {
-    h: FixedArray::from_array(
-      [init0, init1, init2, init3, init4, init5, init6, init7],
-    ),
+    h: FixedArray::from_array([
+      init0, init1, init2, init3, init4, init5, init6, init7,
+    ]),
     x: FixedArray::make(chunk, b'\x00'),
     nx: 0,
     len: 0,
@@ -65,7 +65,7 @@ pub fn Digest::new() -> Digest {
 }
 
 ///|
-let _interface : HashFunc = Digest::new()
+let _interface : &HashFunc = Digest::new()
 
 ///|
 pub fn name(self : Digest) -> String {
