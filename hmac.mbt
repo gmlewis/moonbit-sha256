@@ -57,7 +57,7 @@ fn HMAC::new(key : Bytes) -> HMAC {
 }
 
 ///|
-fn sum(self : HMAC) -> FixedArray[Byte] {
+fn HMAC::sum(self : HMAC) -> FixedArray[Byte] {
   let inner_sum = self.inner.sum()
   self.outer.reset()
   for b in self.opad {
