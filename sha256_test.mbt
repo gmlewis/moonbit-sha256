@@ -137,6 +137,7 @@ let golden : Array[SHA256Test] = [
   },
 ]
 
+///|
 test "check_sum works properly" {
   for tt in golden {
     let digest = @sha256.Digest::new()

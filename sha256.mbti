@@ -1,0 +1,26 @@
+package gmlewis/sha256
+
+// Values
+fn gen_hmac(Bytes, Bytes) -> String
+
+// Types and methods
+type Digest
+impl Digest {
+  check_sum(Self) -> String
+  name(Self) -> String
+  new() -> Self
+  reset(Self) -> Unit
+  write(Self, Byte) -> Unit
+}
+
+type HMAC
+
+// Type aliases
+
+// Traits
+pub(open) trait HashFunc {
+  name(Self) -> String
+  write(Self, Byte) -> Unit
+  check_sum(Self) -> String
+}
+
