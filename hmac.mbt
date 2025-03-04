@@ -18,7 +18,7 @@ pub fn gen_hmac(body : Bytes, client_secret : Bytes) -> String {
 }
 
 ///|
-struct HMAC {
+priv struct HMAC {
   opad : FixedArray[Byte]
   ipad : FixedArray[Byte]
   outer : Digest

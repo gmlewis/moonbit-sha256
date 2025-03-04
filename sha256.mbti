@@ -6,14 +6,10 @@ fn gen_hmac(Bytes, Bytes) -> String
 // Types and methods
 type Digest
 impl Digest {
-  check_sum(Self) -> String
-  name(Self) -> String
   new() -> Self
   reset(Self) -> Unit
-  write(Self, Byte) -> Unit
 }
-
-type HMAC
+impl HashFunc for Digest
 
 // Type aliases
 

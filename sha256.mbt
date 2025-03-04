@@ -68,12 +68,12 @@ pub fn Digest::new() -> Digest {
 let _interface : &HashFunc = Digest::new()
 
 ///|
-pub fn name(self : Digest) -> String {
+pub impl HashFunc for Digest with name(self) {
   self.name
 }
 
 ///| `check_sum` returns the final sha256sum as a hex string.
-pub fn check_sum(self : Digest) -> String {
+pub impl HashFunc for Digest with check_sum(self) {
   let digest = self.sum()
   let result = @buffer.new(size_hint=2 * size)
   for b in digest {
@@ -135,7 +135,7 @@ pub fn reset(self : Digest) -> Unit {
 }
 
 ///| `write` writes a byte to the digest.
-pub fn write(self : Digest, b : Byte) -> Unit {
+pub impl HashFunc for Digest with write(self, b) {
   self.len += 1
   self.x[self.nx] = b
   self.nx += 1
