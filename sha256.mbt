@@ -65,7 +65,7 @@ pub fn Digest::new() -> Digest {
 }
 
 ///|
-let _interface : &HashFunc = Digest::new()
+let _trait : &HashFunc = Digest::new()
 
 ///|
 pub impl HashFunc for Digest with name(self) {
