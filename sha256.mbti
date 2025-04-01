@@ -1,4 +1,4 @@
-package gmlewis/sha256
+package "gmlewis/sha256"
 
 // Values
 fn gen_hmac(Bytes, Bytes) -> String
