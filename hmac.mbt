@@ -5,7 +5,8 @@
 /// Use of this source code is governed by a BSD-style
 /// license that can be found in the LICENSE file.
 
-///| `gen_hmac` generates a base64-encoded String representing
+///|
+/// `gen_hmac` generates a base64-encoded String representing
 /// the SHA256 signature of the provided `body` using the provided
 /// `client_secret` key.
 pub fn gen_hmac(body : Bytes, client_secret : Bytes) -> String {

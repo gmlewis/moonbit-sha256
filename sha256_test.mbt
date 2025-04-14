@@ -1,4 +1,5 @@
-///| This package is based on the Go implementation found here:
+///|
+/// This package is based on the Go implementation found here:
 /// https://cs.opensource.google/go/go/+/refs/tags/go1.23.0:src/crypto/sha256/sha256_test.go
 /// which has the copyright notice:
 /// Copyright 2009 The Go Authors. All rights reserved.
