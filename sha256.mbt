@@ -247,8 +247,8 @@ fn rotl(x : UInt, r : Int) -> UInt {
 ///|
 fn to_hex(v : Int) -> Char {
   if v < 10 {
-    Char::from_int(v + b'0'.to_int())
+    Int::unsafe_to_char(v + b'0'.to_int())
   } else {
-    Char::from_int(v - 10 + b'a'.to_int())
+    Int::unsafe_to_char(v - 10 + b'a'.to_int())
   }
 }
