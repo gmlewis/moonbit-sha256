@@ -7,10 +7,8 @@ fn reset(Digest) -> Unit
 
 // Types and methods
 type Digest
-impl Digest {
-  new() -> Self
-  reset(Self) -> Unit
-}
+fn Digest::new() -> Self
+fn Digest::reset(Self) -> Unit
 impl HashFunc for Digest
 
 // Type aliases
