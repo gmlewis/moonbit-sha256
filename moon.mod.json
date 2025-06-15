@@ -1,8 +1,8 @@
 {
   "name": "gmlewis/sha256",
-  "version": "0.17.8",
+  "version": "0.17.9",
   "deps": {
-    "gmlewis/base64": "0.14.6"
+    "gmlewis/base64": "0.14.7"
   },
   "readme": "README.md",
   "repository": "https://github.com/gmlewis/moonbit-sha256",
