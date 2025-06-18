@@ -9,8 +9,8 @@
 // The size of a sha256 checksum in bytes.
 let size = 32
 
-// The blocksize of sha256 in bytes.
 ///|
+// The blocksize of sha256 in bytes.
 let block_size = 64
 
 ///|

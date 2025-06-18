@@ -3,8 +3,6 @@ package "gmlewis/sha256"
 // Values
 fn gen_hmac(Bytes, Bytes) -> String
 
-fn reset(Digest) -> Unit
-
 // Types and methods
 type Digest
 fn Digest::new() -> Self
