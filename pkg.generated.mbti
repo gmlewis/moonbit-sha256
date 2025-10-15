@@ -8,8 +8,11 @@ fn gen_hmac(Bytes, Bytes) -> String
 
 // Types and methods
 type Digest
+fn Digest::check_sum(Self) -> String // from trait `HashFunc`
+fn Digest::name(Self) -> String // from trait `HashFunc`
 fn Digest::new() -> Self
 fn Digest::reset(Self) -> Unit
+fn Digest::write(Self, Byte) -> Unit // from trait `HashFunc`
 impl HashFunc for Digest
 
 // Type aliases
