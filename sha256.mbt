@@ -89,7 +89,7 @@ pub impl HashFunc for Digest with check_sum(self) {
 
 ///|
 /// `sum` returns the final sha256sum as a `FixedArray[Byte]`.
-fn sum(self : Digest) -> FixedArray[Byte] {
+fn Digest::sum(self : Digest) -> FixedArray[Byte] {
   // Padding. Add a 1 bit and 0 bits until 56 bytes mod 64.
   let tmp = FixedArray::make(64 + 8, b'\x00')
   tmp[0] = b'\x80'
@@ -127,7 +127,7 @@ fn sum(self : Digest) -> FixedArray[Byte] {
 
 ///|
 /// `reset` resets a digest for re-use.
-pub fn reset(self : Digest) -> Unit {
+pub fn Digest::reset(self : Digest) -> Unit {
   self.h[0] = init0
   self.h[1] = init1
   self.h[2] = init2
@@ -167,7 +167,7 @@ let _K = [
 ]
 
 ///|
-fn block_generic(self : Digest) -> Unit {
+fn Digest::block_generic(self : Digest) -> Unit {
   let w = FixedArray::make(64, 0U)
 
   //
