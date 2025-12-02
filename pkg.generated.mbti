@@ -2,15 +2,15 @@
 package "gmlewis/sha256"
 
 // Values
-fn gen_hmac(Bytes, Bytes) -> String
+pub fn gen_hmac(Bytes, Bytes) -> String
 
 // Errors
 
 // Types and methods
 type Digest
-fn Digest::new() -> Self
-fn Digest::reset(Self) -> Unit
-impl HashFunc for Digest
+pub fn Digest::new() -> Self
+pub fn Digest::reset(Self) -> Unit
+pub impl HashFunc for Digest
 
 // Type aliases
 
