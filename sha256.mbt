@@ -71,18 +71,18 @@ pub fn Digest::new() -> Digest {
 let _trait : &HashFunc = Digest::new()
 
 ///|
-pub impl HashFunc for Digest with name(self) {
+pub impl HashFunc for Digest with fn name(self) {
   self.name
 }
 
 ///|
 /// `check_sum` returns the final sha256sum as a hex string.
-pub impl HashFunc for Digest with check_sum(self) {
+pub impl HashFunc for Digest with fn check_sum(self) {
   let digest = self.sum()
-  let result = @buffer.new(size_hint=2 * size)
+  let result = Buffer(size_hint=2 * size)
   for b in digest {
-    result.write_char(to_hex((b.to_int() >> 4) & 0xf))
-    result.write_char(to_hex(b.to_int() & 0xf))
+    result.write_char_utf16le(to_hex((b.to_int() >> 4) & 0xf))
+    result.write_char_utf16le(to_hex(b.to_int() & 0xf))
   }
   result.contents().to_unchecked_string()
 }
@@ -142,7 +142,7 @@ pub fn Digest::reset(self : Digest) -> Unit {
 
 ///|
 /// `write` writes a byte to the digest.
-pub impl HashFunc for Digest with write(self, b) {
+pub impl HashFunc for Digest with fn write(self, b) {
   self.len += 1
   self.x[self.nx] = b
   self.nx += 1
