@@ -1,9 +1,9 @@
 name = "gmlewis/sha256"
 
-version = "0.17.31"
+version = "0.17.32"
 
 import {
-  "gmlewis/base64@0.16.10",
+  "gmlewis/base64@0.16.11",
 }
 
 readme = "README.md"
