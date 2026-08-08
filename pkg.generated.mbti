@@ -20,4 +20,3 @@ pub(open) trait HashFunc {
   fn write(Self, Byte) -> Unit
   fn check_sum(Self) -> String
 }
-
