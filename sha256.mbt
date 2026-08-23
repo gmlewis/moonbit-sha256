@@ -103,7 +103,7 @@ fn Digest::sum(self : Digest) -> FixedArray[Byte] {
   let len = self.len << 3
   be_put_uint64(tmp, t, len) // append length in bits
   for i = 0; i < t + 8; i = i + 1 {
-    self.write(tmp[i])
+    HashFunc::write(self, tmp[i])
   }
 
   // The previous write ensures that a whole number of

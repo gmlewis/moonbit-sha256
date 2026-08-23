@@ -12,7 +12,7 @@
 pub fn gen_hmac(body : Bytes, client_secret : Bytes) -> String {
   let h = HMAC::new(client_secret)
   for b in body {
-    h.inner.write(b)
+    HashFunc::write(h.inner, b)
   }
   let buf = h.sum()
   @base64.url_encode2str(buf)
@@ -38,7 +38,7 @@ fn HMAC::new(key : Bytes) -> HMAC {
   let mut key = FixedArray::from_iter(key.iter())
   if key.length() > block_size {
     for b in key {
-      hm.outer.write(b)
+      HashFunc::write(hm.outer, b)
     }
     key = hm.outer.sum()
   }
@@ -49,7 +49,7 @@ fn HMAC::new(key : Bytes) -> HMAC {
   }
   for index, b in hm.ipad {
     hm.ipad[index] = b ^ b'\x36'
-    hm.inner.write(hm.ipad[index])
+    HashFunc::write(hm.inner, hm.ipad[index])
   }
   for index, b in hm.opad {
     hm.opad[index] = b ^ b'\x5c'
@@ -62,10 +62,10 @@ fn HMAC::sum(self : HMAC) -> FixedArray[Byte] {
   let inner_sum = self.inner.sum()
   self.outer.reset()
   for b in self.opad {
-    self.outer.write(b)
+    HashFunc::write(self.outer, b)
   }
   for b in inner_sum {
-    self.outer.write(b)
+    HashFunc::write(self.outer, b)
   }
   self.outer.sum()
 }
