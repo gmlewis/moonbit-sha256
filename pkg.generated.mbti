@@ -8,8 +8,12 @@ pub fn gen_hmac(Bytes, Bytes) -> String
 
 // Types and methods
 type Digest
+pub fn Digest::check_sum(Self) -> String
+pub fn Digest::name(Self) -> String
 pub fn Digest::new() -> Self
 pub fn Digest::reset(Self) -> Unit
+pub fn Digest::size(Self) -> Int
+pub fn Digest::write(Self, Byte) -> Unit
 pub impl HashFunc for Digest
 
 // Type aliases
@@ -17,6 +21,8 @@ pub impl HashFunc for Digest
 // Traits
 pub(open) trait HashFunc {
   fn name(Self) -> String
+  fn reset(Self) -> Unit
+  fn size(Self) -> Int
   fn write(Self, Byte) -> Unit
   fn check_sum(Self) -> String
 }

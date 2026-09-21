@@ -150,3 +150,52 @@ test "check_sum works properly" {
     inspect(got, content=tt.out)
   }
 }
+
+///|
+test "a single Digest can be reused via reset across the golden table" {
+  let sum = @sha256.Digest::new()
+  for tt in golden {
+    sum.reset()
+    for b in @base64.str2bytes(tt.s) {
+      sum.write(b)
+    }
+    inspect(sum.check_sum(), content=tt.out)
+  }
+}
+
+///|
+test "reset makes a dirty Digest match a freshly created one" {
+  for tt in golden {
+    let fresh = @sha256.Digest::new()
+    for b in @base64.str2bytes(tt.s) {
+      fresh.write(b)
+    }
+    let want = fresh.check_sum()
+    let reused = @sha256.Digest::new()
+    for b in b"data that must not survive the reset" {
+      reused.write(b)
+    }
+    reused.reset()
+    for b in @base64.str2bytes(tt.s) {
+      reused.write(b)
+    }
+    let got = reused.check_sum()
+    assert_eq(got, want)
+    assert_eq(got, tt.out)
+  }
+}
+
+///|
+test "size reports the digest size in bytes" {
+  let sum = @sha256.Digest::new()
+  inspect(sum.name(), content="sha256")
+  inspect(sum.size(), content="32")
+  // `check_sum` renders two hex characters per byte.
+  for tt in golden {
+    sum.reset()
+    for b in @base64.str2bytes(tt.s) {
+      sum.write(b)
+    }
+    assert_eq(sum.check_sum().length(), sum.size() * 2)
+  }
+}

@@ -68,7 +68,7 @@ pub fn Digest::new() -> Digest {
 }
 
 ///|
-let _trait : &HashFunc = Digest::new()
+pub extend Digest with HashFunc::{name, reset, size, write, check_sum}
 
 ///|
 pub impl HashFunc for Digest with fn name(self) {
@@ -127,7 +127,7 @@ fn Digest::sum(self : Digest) -> FixedArray[Byte] {
 
 ///|
 /// `reset` resets a digest for re-use.
-pub fn Digest::reset(self : Digest) -> Unit {
+pub impl HashFunc for Digest with fn reset(self) {
   self.h[0] = init0
   self.h[1] = init1
   self.h[2] = init2
@@ -138,6 +138,12 @@ pub fn Digest::reset(self : Digest) -> Unit {
   self.h[7] = init7
   self.nx = 0
   self.len = 0
+}
+
+///|
+/// `size` is the sha256 digest size in bytes.
+pub impl HashFunc for Digest with fn size(_self) {
+  size
 }
 
 ///|
