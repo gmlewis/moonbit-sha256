@@ -43,9 +43,9 @@ let init7 = 0x5BE0CD19U
 ///|
 /// `Digest` represents the partial evaluation of a checksum.
 struct Digest {
-  h : FixedArray[UInt] // 8
+  h : FixedArray[UInt32] // 8
   x : FixedArray[Byte] // chunk
-  mut nx : Int
+  mut nx : Int32
   mut len : UInt64
   // workaround to get rid of compiler warning:
   // See: https://discord.com/channels/1135479745207869510/1272985768498958387/1275082247484997693
@@ -159,7 +159,7 @@ pub impl HashFunc for Digest with fn write(self, b) {
 }
 
 ///|
-let _K : ReadOnlyArray[UInt] = [
+let _K : ReadOnlyArray[UInt32] = [
   0x428a2f98U, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4,
   0xab1c5ed5, 0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe,
   0x9bdc06a7, 0xc19bf174, 0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f,
@@ -232,7 +232,7 @@ fn Digest::block_generic(self : Digest) -> Unit {
 }
 
 ///|
-fn be_put_uint32(b : FixedArray[Byte], offset : Int, value : UInt) -> Unit {
+fn be_put_uint32(b : FixedArray[Byte], offset : Int32, value : UInt32) -> Unit {
   b[offset + 3] = (value & 0xff).to_byte()
   b[offset + 2] = ((value >> 8) & 0xff).to_byte()
   b[offset + 1] = ((value >> 16) & 0xff).to_byte()
@@ -240,21 +240,21 @@ fn be_put_uint32(b : FixedArray[Byte], offset : Int, value : UInt) -> Unit {
 }
 
 ///|
-fn be_put_uint64(b : FixedArray[Byte], offset : Int, value : UInt64) -> Unit {
+fn be_put_uint64(b : FixedArray[Byte], offset : Int32, value : UInt64) -> Unit {
   be_put_uint32(b, offset + 4, (value & 0xffffffff).to_uint())
   be_put_uint32(b, offset, ((value >> 32) & 0xffffffff).to_uint())
 }
 
 ///|
-fn rotl(x : UInt, r : Int) -> UInt {
+fn rotl(x : UInt32, r : Int32) -> UInt32 {
   (x << r) | (x >> (32 - r))
 }
 
 ///|
-fn to_hex(v : Int) -> Char {
+fn to_hex(v : Int32) -> Char {
   if v < 10 {
-    Int::unsafe_to_char(v + b'0'.to_int())
+    Int32::unsafe_to_char(v + b'0'.to_int())
   } else {
-    Int::unsafe_to_char(v - 10 + b'a'.to_int())
+    Int32::unsafe_to_char(v - 10 + b'a'.to_int())
   }
 }

@@ -19,7 +19,7 @@ pub(open) trait HashFunc {
   fn reset(Self) -> Unit
   // `size` is the digest size in bytes. `check_sum` renders these as two hex
   // characters per byte.
-  fn size(Self) -> Int
+  fn size(Self) -> Int32
   // `write` feeds a single byte to the digest.
   fn write(Self, Byte) -> Unit
   // `check_sum` returns the current digest as a hex string. Unlike Go's `Sum`,
