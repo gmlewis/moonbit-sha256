@@ -1,6 +1,6 @@
 name = "gmlewis/sha256"
 
-version = "0.18.1"
+version = "0.18.2"
 
 import {
   "gmlewis/base64@0.16.14",
