@@ -79,7 +79,7 @@ pub impl HashFunc for Digest with fn name(self) {
 /// `check_sum` returns the final sha256sum as a hex string.
 pub impl HashFunc for Digest with fn check_sum(self) {
   let digest = self.sum()
-  let result = Buffer(size_hint=2 * size)
+  let result = Buffer(capacity=2 * size)
   for b in digest {
     result.write_char_utf16le(to_hex((b.to_int() >> 4) & 0xf))
     result.write_char_utf16le(to_hex(b.to_int() & 0xf))
